@@ -2,66 +2,82 @@
 #include <fstream>
 using namespace std;
 
-const int MAX = 100; 
+const int MAX = 100;
 
 // Function prototypes
-void readMatrix(int mat[][MAX], int &n, string filename);
-void printMatrix(int mat[][MAX], int n);
+void printMatrix(int mat[][MAX], int n, string name);
 void addMatrix(int mat1[][MAX], int mat2[][MAX], int result[][MAX], int n);
 void multiplyMatrix(int mat1[][MAX], int mat2[][MAX], int result[][MAX], int n);
 void subtractMatrix(int mat1[][MAX], int mat2[][MAX], int result[][MAX], int n);
 
 int main() {
 
-  int A[MAX][MAX], B[MAX][MAX], result[MAX][MAX], n;
-  
-  // Read matrix data from file 
-  readMatrix(A, n, "matrix_input.txt");
-  readMatrix(B, n, "matrix_input.txt");
+  int A[MAX][MAX] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+  int B[MAX][MAX] = {{2, 3, 4}, {5, 6, 7}, {8, 9, 10}};
+  int result[MAX][MAX];
+  int n = 3;
 
   // Print A and B
-  cout << "Matrix A:" << endl;
-  printMatrix(A, n);
+  cout << "Omar Faruque" << endl;
+  cout << "Lab #6: Matrix manipulation" << endl << endl;
 
-  cout << "Matrix B:" << endl;
-  printMatrix(B, n);
+  printMatrix(A, n, "Matrix A");
+  printMatrix(B, n, "Matrix B");
 
   // Add A and B
   addMatrix(A, B, result, n);
   cout << "Matrix Sum (A + B):" << endl;
-  printMatrix(result, n);
+  printMatrix(result, n, "");
 
   // Multiply A and B 
   multiplyMatrix(A, B, result, n);
   cout << "Matrix Product (A * B):" << endl;
-  printMatrix(result, n);
+  printMatrix(result, n, "");
 
   // Subtract A and B
   subtractMatrix(A, B, result, n);
   cout << "Matrix Difference (A - B):" << endl;
-  printMatrix(result, n);
+  printMatrix(result, n, "");
 
   return 0;
 }
 
 // Function definitions below main()
 
-void readMatrix(int mat[][MAX], int &n, string filename) {
-  // Implementation to read matrix from file
-}
-
-void printMatrix(int mat[][MAX], int n) {
-  // Implementation to print matrix 
+void printMatrix(int mat[][MAX], int n, string name) {
+  cout << name << ":" << endl;
+  for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+          cout << mat[i][j] << " ";
+      }
+      cout << endl;
+  }
+  cout << endl;
 }
 
 void addMatrix(int mat1[][MAX], int mat2[][MAX], int result[][MAX], int n) {
-  // Implementation to add two matrices
+  for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+          result[i][j] = mat1[i][j] + mat2[i][j];
+      }
+  }
 }
 
 void multiplyMatrix(int mat1[][MAX], int mat2[][MAX], int result[][MAX], int n) {
-  // Implementation for matrix multiplication
+  for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+          result[i][j] = 0;
+          for (int k = 0; k < n; k++) {
+              result[i][j] += mat1[i][k] * mat2[k][j];
+          }
+      }
+  }
 }
 
 void subtractMatrix(int mat1[][MAX], int mat2[][MAX], int result[][MAX], int n) {
-  // Implementation to subtract two matrices
+  for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+          result[i][j] = mat1[i][j] - mat2[i][j];
+      }
+  }
 }
